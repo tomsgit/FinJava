@@ -1,2 +1,5 @@
 FinanceClient/src/main/resources/Finance-5e405c3c73fa.json
 FinanceClient/src/main/resources/Txns9Apr18.csv
+lamda/target/
+lamda/.settings/
+lamda/src/main/java/Finance-5e405c3c73fa.json
