@@ -42,7 +42,7 @@ public class App implements RequestHandler<Input, String>{
 			quotesToPersist = QuoteService.filterAndStreamQuotes(tickersToTrack::containsKey,in)
 				.peek(q -> logger.debug("quote for {}",q.getCode()));
 
-			quotesToPersist.forEach(q -> logger.debug("Code >>>{}",q.getCode()));	
+				
 			QuoteService.persist(quotesToPersist);
 			Thread.sleep(2000);
 			
