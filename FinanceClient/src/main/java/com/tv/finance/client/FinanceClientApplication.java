@@ -31,31 +31,38 @@ import com.tv.finance.model.Txn;
 public class FinanceClientApplication {
 
 	private static Logger log = LoggerFactory.getLogger(FinanceClientApplication.class);
+	
 	public static void main(String[] args) {
 		SpringApplication.run(FinanceClientApplication.class, args);
-		new FinanceClientApplication().writeTickers();
+		try {
+			new FinanceClientApplication().writeTxns("2018.csv");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
-	private Stream<Txn> parseAndStreamTxns() {
+	private Stream<Txn> parseAndStreamTxns(String fileName) throws Exception {
 		try {
-			return TxnParser.fromStream(FinanceClientApplication.class.getClassLoader().getResourceAsStream("Txns9Apr18.csv"))
+			return TxnParser.fromStream(FinanceClientApplication.class.getClassLoader().getResourceAsStream(fileName))
 				.stream();
 				
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return null;
+			throw new Exception("Exception Parsing and streaming Txns", e);
+
 		}
 		
 	}
-	private void writeTickers() {
+	private void writeTickers(String file) throws Exception {
 		try {
 			Firestore fs =  FirestoreClient.getFirestore();
 			WriteBatch b = fs.batch();
 			
 
 			CollectionReference cr = fs.collection("ticker");
-			Stream<Txn> txns = this.parseAndStreamTxns();
+			Stream<Txn> txns = this.parseAndStreamTxns(file);
 			if(txns ==null) {
 				return;
 			}
@@ -87,15 +94,15 @@ public class FinanceClientApplication {
 		
 	
 	}
-	private void writeTxns() {
+	private void writeTxns(String file) {
 		try {
 			Firestore fs =  FirestoreClient.getFirestore();
 			WriteBatch b = fs.batch();
 			
-
-			CollectionReference cr = fs.collection("portfolio/yhRy4aLy9x3ShA5bbUBW/txns");
+				//2018
+			CollectionReference cr = fs.collection("portfolio/BrEnVJguni3T3dDLVSc0/txns");
 			
-			this.parseAndStreamTxns()
+			this.parseAndStreamTxns(file)
 				.forEach(t -> {
 									
 						b.create(cr.document(), t);
@@ -107,7 +114,7 @@ public class FinanceClientApplication {
 				.forEach(wr ->{
 					log.debug("write >"+wr.getUpdateTime());
 			});;
-		} catch (InterruptedException |ExecutionException e ) {
+		} catch (Exception e ) {
 			log.error("Exception", e);
 		} 
 		

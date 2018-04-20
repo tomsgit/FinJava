@@ -113,5 +113,31 @@ public class Txn {
 	public void setCommission(double commission) {
 		this.commission = commission;
 	}
+	
+	@Override
+	public String toString() {
+		
+		StringBuilder sb = new StringBuilder();
+		
+		String kvsep = "-";
+		String fieldSep="< | >";
+		
+		sb.append("TXN").append("->");
+		
+		sb.append("code").append(kvsep).append(code).append(fieldSep);
+		sb.append("name").append(kvsep).append(name).append(fieldSep);
+		sb.append("type").append(kvsep).append(type).append(fieldSep);
+		sb.append("broker").append(kvsep).append(broker).append(fieldSep);
+		sb.append("exchange").append(kvsep).append(exchange).append(fieldSep);
+		
+		sb.append("shares").append(kvsep).append(shares).append(fieldSep);
+		sb.append("price").append(kvsep).append(price).append(fieldSep);
+		sb.append("commission").append(kvsep).append(commission).append(fieldSep);
+		sb.append("value").append(kvsep).append(value).append(fieldSep);
+		sb.append("remarks").append(kvsep).append(remarks).append(fieldSep);
+		
+		sb.append("date").append(kvsep).append(date).append(fieldSep);
+		return sb.toString();
+	}
 
 }
