@@ -2,6 +2,7 @@ package com.tv.finance.lamda;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Map;
 
 import org.apache.http.client.fluent.Request;
 import org.apache.logging.log4j.LogManager;
@@ -12,8 +13,18 @@ public class HttpService {
 	private static final Logger logger = LogManager.getLogger(HttpService.class);
 
 	public static InputStream getStream(String url) {
+		return getStream(url, null);
+	}
+	public static InputStream getStream(String url, Map<String, String> headers) {
 		try {
-			return Request.Get(url).execute().returnContent().asStream();
+			Request r = Request.Get(url);
+			
+			if(headers != null) {
+				for(String header: headers.keySet()) {
+					r.addHeader(header, headers.get(header));
+				}
+			}
+			return r.execute().returnContent().asStream();
 		} catch (IOException e) {
 			logger.error("IO exception while getting ",url);
 			logger.error("IO exception",e);

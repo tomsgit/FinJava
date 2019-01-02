@@ -11,6 +11,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Spliterator;
@@ -43,7 +44,8 @@ public class QuoteService {
 	//private static final String NSE_BHAV_COPY = "https://www.nseindia.com/content/historical/EQUITIES/2018/APR/cm10APR2018bhav.csv.zip";
 	
 	private static final String NSE_BHAV_COPY = "https://www.nseindia.com/content/historical/EQUITIES/{year}/{month}/cm{date}bhav.csv.zip";
-	
+	private static final String REFERER_HEADER_VAL = "https://www.nseindia.com";
+	private static final String REFERER_HEADER = "Referer";
 	/**
 	 * Name of the Quote collection
 	 */
@@ -78,7 +80,9 @@ public class QuoteService {
 		}
 		String url =getUrl(ldt);
 		logger.info("Fetching from :{}",url);
-		is = HttpService.getStream(url);
+		Map<String, String> headers = new HashMap<String, String>();
+		headers.put(REFERER_HEADER, REFERER_HEADER_VAL);
+		is = HttpService.getStream(url,headers);
 		
 		if(is ==null) {
 			throw new Exception("Unable to get file from HttpService");
