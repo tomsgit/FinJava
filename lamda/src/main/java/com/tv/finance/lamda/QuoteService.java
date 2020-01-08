@@ -43,7 +43,7 @@ public class QuoteService {
 	
 	//private static final String NSE_BHAV_COPY = "https://www.nseindia.com/content/historical/EQUITIES/2018/APR/cm10APR2018bhav.csv.zip";
 	
-	private static final String NSE_BHAV_COPY = "https://www.nseindia.com/content/historical/EQUITIES/{year}/{month}/cm{date}bhav.csv.zip";
+	private static final String NSE_BHAV_COPY = "https://www1.nseindia.com/content/historical/EQUITIES/{year}/{month}/cm{date}bhav.csv.zip";
 	private static final String REFERER_HEADER_VAL = "https://www.nseindia.com";
 	private static final String REFERER_HEADER = "Referer";
 	/**
