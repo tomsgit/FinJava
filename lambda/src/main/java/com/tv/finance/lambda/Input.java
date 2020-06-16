@@ -1,4 +1,4 @@
-package com.tv.finance.lamda;
+package com.tv.finance.lambda;
 
 public class Input {
 	//dd-MM-yyyy

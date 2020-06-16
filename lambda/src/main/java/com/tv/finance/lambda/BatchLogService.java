@@ -1,4 +1,4 @@
-package com.tv.finance.lamda;
+package com.tv.finance.lambda;
 
 import java.util.concurrent.ExecutionException;
 

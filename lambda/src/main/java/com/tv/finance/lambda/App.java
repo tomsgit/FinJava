@@ -1,4 +1,4 @@
-package com.tv.finance.lamda;
+package com.tv.finance.lambda;
 
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -19,7 +19,7 @@ public class App implements RequestHandler<Input, String>{
 	public static void main(String[] args) {
 		App app = new App();
 		Input in = new Input();
-		in.setDate("13-04-2018");
+		in.setDate("07-01-2020");
 		app.handleRequest(in, null);
 	}
 	
