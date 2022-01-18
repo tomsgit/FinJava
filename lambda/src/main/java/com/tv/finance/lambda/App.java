@@ -19,7 +19,7 @@ public class App implements RequestHandler<Input, String>{
 	public static void main(String[] args) {
 		App app = new App();
 		Input in = new Input();
-		in.setDate("07-01-2020");
+		in.setDate("18-01-2022");
 		app.handleRequest(in, null);
 	}
 	
